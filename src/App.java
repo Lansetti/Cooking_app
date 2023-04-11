@@ -9,7 +9,7 @@ public class App {
     }
 
     private App mainMenu(App console) {
-        System.out.println("Welcome to the console application");
+        System.out.println("Welcome to the Cooking application");
         Scanner scan = new Scanner(System.in);
         int selection = 0;
 
