@@ -81,8 +81,8 @@ public class RecipeApp {
         recipes.add(recipe);
         try (FileWriter writer = new FileWriter(new File("recipes.txt"), true)) {
             writer.write(
-                    "\n" + recipe.getName() + "," + recipe.getIngredients() + "," + recipe.getDescription() + ","
-                    + recipe.getTime() + "," + recipe.getType() + "\n");
+                    "\n" + recipe.getName() + ";" + recipe.getIngredients() + ";" + recipe.getDescription() + ";"
+                    + recipe.getTime() + ";" + recipe.getType() + "\n");
             
             System.out.println("Recipes saved to file successfully.");
         } catch (IOException e) {
