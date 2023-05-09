@@ -7,19 +7,22 @@ public class RecipeApp {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        loadRecipesFromFile();
         int choice = 0;
         System.out.println("Welcome to Nonna's Kitchen");
         do {
+            System.out.println(); // Just for visuals
             System.out.println("Please choose an option:");
             System.out.println("");
-            System.out.println("1. Add a new recipe");
-            System.out.println("2. Show one recipe");
-            System.out.println("3. Show all recipes");
-            System.out.println("4. Remove one recipe");
-            System.out.println("5. Show recipes by cooking time");
-            System.out.println("6. Show recipes by ingredients");
-            System.out.println("7. Show recipes by type");
-            System.out.println("0. Exit");
+            System.out.println("[1] Add a new recipe");
+            System.out.println("[2] Show one recipe");
+            System.out.println("[3] Show all recipes");
+            System.out.println("[4] Remove one recipe");
+            System.out.println("[5] Show recipes by cooking time");
+            System.out.println("[6] Show recipes by ingredients");
+            System.out.println("[7] Show recipes by type");
+            System.out.println("[0] Exit");
+            System.out.print("Number: ");
 
             choice = scanner.nextInt();
             scanner.nextLine();
@@ -30,32 +33,24 @@ public class RecipeApp {
                     saveRecipesToFile();
                     break;
                 case 2:
-                    loadRecipesFromFile();
                     showOneRecipe();
                     break;
                 case 3:
-                    loadRecipesFromFile();
                     showAllRecipes();
                     break;
                 case 4:
-                    loadRecipesFromFile();
                     removeRecipe();
                     break;
                 case 5:
-                    loadRecipesFromFile();
                     typeCookingTime();
                     break;
                 case 6:
-                    loadRecipesFromFile();
                     typeIngredients();
                     break;
                 case 7:
-                    loadRecipesFromFile();
                     typeType();
                     break;
-                case 8:
-                    loadRecipesFromFile();
-                    typeType();
+                case 0:                 // Added for not fireing the default case on exit.
                     break;
                 default:
                     System.out.println("Invalid choice.");
@@ -90,12 +85,21 @@ public class RecipeApp {
     // Show a single recipe by name.
 
     private static void showOneRecipe() {
+        System.out.println();
         System.out.println("Please enter the recipe name:");
+        for (Recipe recipe : recipes) {
+            System.out.print(recipe.getName() + ", ");  // Show the names of all the recipes (I cant remember them otherwise)
+        }
+        System.out.println();
         String name = scanner.nextLine();
+        System.out.println();
 
         for (Recipe recipe : recipes) {
             if (recipe.getName().contains(name)) {
                 System.out.println(recipe);
+                System.out.println();
+                System.out.print("--- Press enter to continue ---");
+                scanner.nextLine();
                 return;
             }
         }
@@ -109,6 +113,9 @@ public class RecipeApp {
         for (Recipe recipe : recipes) {
             System.out.println(recipe);
         }
+        System.out.println();
+        System.out.print("--- Press enter to continue ---");
+        scanner.nextLine();
     }
 
     // Remove a recipe from the list. The name entered must be equal to the name on
@@ -196,7 +203,7 @@ public class RecipeApp {
         }
     }
 
-    // Load all recipies from a file
+    // Load all recipies from a file to memory
 
     public static void loadRecipesFromFile() {
         try (Scanner fileScanner = new Scanner(new File("recipes.txt"))) {
