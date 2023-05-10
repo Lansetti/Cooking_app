@@ -45,7 +45,7 @@ public class Recipe {
                 " Name: " + name + '\n' +
                 "Ingredients:" + ingredients + '\n' +
                 "Description:" + description + '\n' +
-                "Cooking time:" + time + " minutes" + '\n' +
+                "Cooking time: " + time + " minutes" + '\n' +
                 "Recipe type:" + type + '\n';
     }
     }
