@@ -130,7 +130,10 @@ public class RecipeApp {
     // and asks the user to confirm.
 
     private static void removeRecipe() {
-        System.out.println("Please enter the recipe name:");
+        for (Recipe recipe : recipes) {
+            System.out.print(recipe.getName() + "; ");
+        }
+        System.out.println("\n" + "Please enter the recipe name you want to delete:");
         String name = scanner.nextLine();
 
         Iterator<Recipe> iterator = recipes.iterator();
@@ -147,52 +150,50 @@ public class RecipeApp {
                 if (confirmation.equals("yes")) {
                     iterator.remove();
                     removed = true;
-                    System.out.println("Recipe deleted.");
+                    System.out.println("Recipe deleted from program.");
+                    
 
                     try {
+                        // Open the input file
                         File inputFile = new File("recipes.txt");
-                        File tempFile = new File("temp.txt");
-
                         BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-                        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
-
-                        String lineToRemove = recipe.getName() + "," + recipe.getIngredients() + ","
-                                + recipe.getDescription() + ","
-                                + recipe.getTime() + "," + recipe.getType();
-                        String currentLine;
-                        boolean found = false;
-
-                        while ((currentLine = reader.readLine()) != null) {
-                            String trimmedLine = currentLine.trim();
-                            if (trimmedLine.equals(lineToRemove)) {
-                                found = true;
-                                continue;
+            
+                        // Open the output file
+                        File outputFile = new File("output.txt");
+                        BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
+            
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            // Check if the line has the word in the variable "name".
+                            if (line.contains(name)) {
+                                continue; // skip this line
                             }
-                            writer.write(currentLine + System.getProperty("line.separator"));
+            
+                            // Write the line to the output file
+                            writer.write(line);
+                            writer.newLine();
                         }
-
-                        writer.close();
+            
+                        // Close the input and output files
                         reader.close();
-
-                        if (found && !tempFile.renameTo(inputFile)) {
-                            throw new IOException("Could not rename temp file to output file");
-                        } else if (!found) {
-                            System.out.println("Recipe not found in file.");
-                        }
-
+                        writer.close();
+            
+                        // Replace the input file with the output file
+                        inputFile.delete();
+                        outputFile.renameTo(inputFile);
+            
+                        System.out.println("Recipe deleted from the file");
                     } catch (IOException e) {
-                        System.out.println("Error deleting recipe from file.");
+                        System.out.println("An error occurred: " + e.getMessage());
                     }
-                } else {
-                    System.out.println("Deletion cancelled.");
                 }
-                break;
             }
+            
+            
         }
-
         if (!removed) {
             System.out.println("Recipe not found.");
-        }
+    }
     }
 
     // Save a recipe to the file
