@@ -242,17 +242,19 @@ public class RecipeApp {
     // Print a list of recipies containing an Ingredient entered by the user.
 
     public static void typeIngredients() {
-        System.out.println("Please enter an ingredient:");
+       System.out.println("Please enter an ingredient:");
         String ingredient = scanner.nextLine();
+        boolean found = false;
 
         for (Recipe recipe : recipes) {
             if (recipe.getIngredients().contains(ingredient)) {
                 System.out.println(recipe);
-                return;
+                found = true;
             }
         }
-
-        System.out.println("Recipe not found.");
+        if(!found) {
+        System.out.println("No recipes found with " + ingredient + " ingredient.");
+        }
     }
 
     // Print a list of recipes that are of a type entered by the user.
