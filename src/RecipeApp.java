@@ -11,7 +11,7 @@ public class RecipeApp {
         int choice = 0;
         System.out.println("Welcome to Nonna's Kitchen");
         do {
-            System.out.println(); // Just for visuals
+            System.out.println();
             System.out.println("Please choose an option:");
             System.out.println("");
             System.out.println("[1] Add a new recipe");
@@ -49,7 +49,7 @@ public class RecipeApp {
                 case 7:
                     typeType();
                     break;
-                case 0:                 // Added for not fireing the default case on exit.
+                case 0:
                     break;
                 default:
                     System.out.println("Invalid choice.");
@@ -205,32 +205,30 @@ public class RecipeApp {
     public static void typeIngredients() {
        System.out.println("Please enter an ingredient:");
         String ingredient = scanner.nextLine();
-<<<<<<< Updated upstream
-        boolean found = false;
-
-=======
         Boolean found = false;
->>>>>>> Stashed changes
+
+
         for (Recipe recipe : recipes) {
             if (recipe.getIngredients().contains(ingredient)) {
                 System.out.println(recipe);
                 found = true;
             }
         }
-<<<<<<< Updated upstream
+
         if(!found) {
         System.out.println("No recipes found with " + ingredient + " ingredient.");
         }
-=======
+
 
         if (!found) {
             System.out.println("Recipe not found.");
         }
         pausePrint();
->>>>>>> Stashed changes
+
     }
 
     // Print a list of recipes that are of a type entered by the user.
+
     public static void typeType() {
         System.out.println("Please enter a recipe type (eg. Vegan, Vegetarian...):");
         String type = scanner.nextLine();
@@ -250,12 +248,15 @@ public class RecipeApp {
     }
 
     // Show the names of all the recipes (I cant remember them otherwise)
+
     public static void recipeNames() {
         for (Recipe recipe : recipes) {
             System.out.print(recipe.getName() + ", ");
         }
         System.out.println();
     }
+
+    // Pause for readability
 
     public static void pausePrint() {
         System.out.print("--- Press enter to continue ---");
