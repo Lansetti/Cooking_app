@@ -23,37 +23,46 @@ public class RecipeApp {
             System.out.println("[7] Show recipes by type");
             System.out.println("[0] Exit");
             System.out.print("Number: ");
+            while (true) {    
+                if (!scanner.hasNextInt()) {
+                    System.out.println("Enter only numbers from 0 to 7!: ");
+                    scanner.next();
+                    continue;
+                }
+                else {    
+                    choice = scanner.nextInt();
+                    scanner.nextLine();
 
-            choice = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (choice) {
-                case 1:
-                    addRecipe();
-                    break;
-                case 2:
-                    showOneRecipe();
-                    break;
-                case 3:
-                    showAllRecipes();
-                    break;
-                case 4:
-                    removeRecipe();
-                    break;
-                case 5:
-                    typeCookingTime();
-                    break;
-                case 6:
-                    typeIngredients();
-                    break;
-                case 7:
-                    typeType();
-                    break;
-                case 0:
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-                    break;
+                    switch (choice) {
+                        case 1:
+                            addRecipe();
+                            break;
+                        case 2:
+                            showOneRecipe();
+                            break;
+                        case 3:
+                            showAllRecipes();
+                            break;
+                        case 4:
+                            removeRecipe();
+                            break;
+                        case 5:
+                            typeCookingTime();
+                            break;
+                        case 6:
+                            typeIngredients();
+                            break;
+                        case 7:
+                            typeType();
+                            break;
+                        case 0:
+                            break;
+                        default:
+                            System.out.println("Invalid choice.");
+                            break;
+                    }
+                }
+                break;
             }
         } while (choice != 0);
 
