@@ -23,42 +23,51 @@ public class RecipeApp {
             System.out.println("[7] Show recipes by type");
             System.out.println("[0] Exit");
             System.out.print("Number: ");
+            for (;;) {
+                if (!scanner.hasNextInt()) {
+                    System.out.println("Enter only numbers from 0 to 7!: ");
+                    scanner.next(); // discard
+                    continue;
+                }
 
-            choice = scanner.nextInt();
-            scanner.nextLine();
+                else {
+                    choice = scanner.nextInt();
+                    scanner.nextLine();
 
-            switch (choice) {
-                case 1:
-                    addRecipe();
-                    saveRecipesToFile();
+                    switch (choice) {
+                        case 1:
+                            addRecipe();
+                            saveRecipesToFile();
+                            break;
+                        case 2:
+                            showOneRecipe();
+                            break;
+                        case 3:
+                            showAllRecipes();
+                            break;
+                        case 4:
+                            removeRecipe();
+                            break;
+                        case 5:
+                            typeCookingTime();
+                            break;
+                        case 6:
+                            typeIngredients();
+                            break;
+                        case 7:
+                            typeType();
+                            break;
+                        case 0: // Added for not fireing the default case on exit.
+                            break;
+                        default:
+                            System.out.println("Invalid choice.");
+                            break;
+                    }
                     break;
-                case 2:
-                    showOneRecipe();
-                    break;
-                case 3:
-                    showAllRecipes();
-                    break;
-                case 4:
-                    removeRecipe();
-                    break;
-                case 5:
-                    typeCookingTime();
-                    break;
-                case 6:
-                    typeIngredients();
-                    break;
-                case 7:
-                    typeType();
-                    break;
-                case 0: // Added for not fireing the default case on exit.
-                    break;
-                default:
-                    System.out.println("Invalid choice."); 
-                    break;
+                }
             }
         } while (choice != 0);
 
-        System.out.println("Goodbye!");
     }
 
     private static void addRecipe() { // User add a recipe to the program and file inserting all the details.
@@ -145,55 +154,54 @@ public class RecipeApp {
                 System.out.println("Found recipe: ");
                 System.out.println(recipe);
 
-                System.out.println("Are you sure you want to delete this recipe? (yes/no)"); //ask confirmation to delete the recipe
+                System.out.println("Are you sure you want to delete this recipe? (yes/no)"); // ask confirmation to
+                                                                                             // delete the recipe
                 String confirmation = scanner.nextLine().toLowerCase();
                 if (confirmation.equals("yes")) {
                     iterator.remove();
                     removed = true;
                     System.out.println("Recipe deleted from program.");
-                    
 
                     try {
                         // Open the input file
                         File inputFile = new File("recipes.txt");
                         BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-            
+
                         // Open the output file
                         File outputFile = new File("output.txt");
                         BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
-            
+
                         String line;
                         while ((line = reader.readLine()) != null) {
                             // Check if the line has the word in the variable "name".
                             if (line.contains(name)) {
                                 continue; // skip this line
                             }
-            
+
                             // Write the line to the output file
                             writer.write(line);
                             writer.newLine();
                         }
-            
+
                         // Close the input and output files
                         reader.close();
                         writer.close();
-            
+
                         // Replace the input file with the output file
                         inputFile.delete();
                         outputFile.renameTo(inputFile);
-            
+
                         System.out.println("Recipe deleted from the file");
                     } catch (IOException e) {
                         System.out.println("An error occurred: " + e.getMessage());
                     }
                 }
             }
-            
-            
+
         }
         if (!removed) {
             System.out.println("Recipe not found.");
-    }
+        }
     }
 
     // Save a recipe to the file
@@ -223,27 +231,38 @@ public class RecipeApp {
 
     public static void typeCookingTime() {
         System.out.println("Please enter the max cooking time in minutes:");
-        int time = Integer.valueOf(scanner.nextLine());
-        boolean found = false;
-        for (Recipe recipe : recipes) {
-            if (Integer.parseInt(recipe.getTime()) <= time) {
-                System.out.println(recipe);
-                found = true;
+        for (;;) {
+            if (!scanner.hasNextInt()) {
+                System.out.println("Enter only integers!: ");
+                scanner.next(); // discard
+                continue;
             }
 
+            else {
+                int time = scanner.nextInt();
+                boolean found = false;
+                for (Recipe recipe : recipes) {
+                    if (Integer.parseInt(recipe.getTime()) <= time) {
+                        System.out.println(recipe);
+                        found = true;
+                    }
+
+                }
+
+                if (!found) {
+                    System.out
+                            .println("No recipes found with cooking time less than or equal to " + time + " minutes.");
+
+                }
+                break;
+            }
         }
-
-        if (!found) {
-            System.out.println("No recipes found with cooking time less than or equal to " + time + " minutes.");
-
-        }
-
     }
 
     // Print a list of recipies containing an Ingredient entered by the user.
 
     public static void typeIngredients() {
-        System.out.println("Please enter an ingredient:");
+        System.out.println("Please enter an ingredient: ");
         String ingredient = scanner.nextLine();
         boolean found = false;
 
@@ -253,8 +272,8 @@ public class RecipeApp {
                 found = true;
             }
         }
-        if(!found) {
-        System.out.println("No recipes found with " + ingredient + " ingredient.");
+        if (!found) {
+            System.out.println("No recipes found with " + ingredient + " ingredient.");
         }
     }
 
