@@ -9,10 +9,10 @@ public class RecipeApp {
     public static void main(String[] args) {
         loadRecipesFromFile();
         int choice = 0;
-        System.out.println("Welcome to Nonna's Kitchen");
+        System.out.println("Welcome to Nonna's Kitchen"); // Welcome message to the user.
         do {
             System.out.println(); // Just for visuals
-            System.out.println("Please choose an option:");
+            System.out.println("Please choose an option:"); // Choosing an option from the menu.
             System.out.println("");
             System.out.println("[1] Add a new recipe");
             System.out.println("[2] Show one recipe");
@@ -50,10 +50,10 @@ public class RecipeApp {
                 case 7:
                     typeType();
                     break;
-                case 0:                 // Added for not fireing the default case on exit.
+                case 0: // Added for not fireing the default case on exit.
                     break;
                 default:
-                    System.out.println("Invalid choice.");
+                    System.out.println("Invalid choice."); 
                     break;
             }
         } while (choice != 0);
@@ -61,7 +61,7 @@ public class RecipeApp {
         System.out.println("Goodbye!");
     }
 
-    private static void addRecipe() {
+    private static void addRecipe() { // User add a recipe to the program and file inserting all the details.
         System.out.println("Add recipe name:");
         String name = scanner.nextLine();
 
@@ -82,8 +82,8 @@ public class RecipeApp {
         try (FileWriter writer = new FileWriter(new File("recipes.txt"), true)) {
             writer.write(
                     "\n" + recipe.getName() + ";" + recipe.getIngredients() + ";" + recipe.getDescription() + ";"
-                    + recipe.getTime() + ";" + recipe.getType() + "\n");
-            
+                            + recipe.getTime() + ";" + recipe.getType() + "\n");
+
             System.out.println("Recipes saved to file successfully.");
         } catch (IOException e) {
             System.out.println("Error saving recipes to file.");
@@ -95,7 +95,8 @@ public class RecipeApp {
         System.out.println();
         System.out.println("Please enter the recipe name:");
         for (Recipe recipe : recipes) {
-            System.out.print(recipe.getName() + ", ");  // Show the names of all the recipes (I cant remember them otherwise)
+            System.out.print(recipe.getName() + ", "); // Show the names of all the recipes (I cant remember them
+                                                       // otherwise)
         }
         System.out.println();
         String name = scanner.nextLine();
@@ -126,12 +127,11 @@ public class RecipeApp {
     }
 
     // Remove a recipe from the list. The name entered must be equal to the name on
-    // the list. Can we edit the code so it shows the repcipe to be deleted
-    // and asks the user to confirm.
+    // the list.
 
     private static void removeRecipe() {
         for (Recipe recipe : recipes) {
-            System.out.print(recipe.getName() + "; ");
+            System.out.print(recipe.getName() + "; "); // Show the names of all the recipes
         }
         System.out.println("\n" + "Please enter the recipe name you want to delete:");
         String name = scanner.nextLine();
@@ -145,7 +145,7 @@ public class RecipeApp {
                 System.out.println("Found recipe: ");
                 System.out.println(recipe);
 
-                System.out.println("Are you sure you want to delete this recipe? (yes/no)");
+                System.out.println("Are you sure you want to delete this recipe? (yes/no)"); //ask confirmation to delete the recipe
                 String confirmation = scanner.nextLine().toLowerCase();
                 if (confirmation.equals("yes")) {
                     iterator.remove();
@@ -199,7 +199,7 @@ public class RecipeApp {
     // Save a recipe to the file
 
     public static void saveRecipesToFile() {
-        
+
     }
 
     // Load all recipies from a file to memory
@@ -243,7 +243,7 @@ public class RecipeApp {
     // Print a list of recipies containing an Ingredient entered by the user.
 
     public static void typeIngredients() {
-       System.out.println("Please enter an ingredient:");
+        System.out.println("Please enter an ingredient:");
         String ingredient = scanner.nextLine();
         boolean found = false;
 
