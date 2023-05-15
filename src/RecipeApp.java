@@ -219,10 +219,6 @@ public class RecipeApp {
         System.out.println("No recipes found with " + ingredient + " ingredient.");
         }
 
-
-        if (!found) {
-            System.out.println("Recipe not found.");
-        }
         pausePrint();
 
     }
