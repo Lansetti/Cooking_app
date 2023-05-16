@@ -27,6 +27,7 @@ public class RecipeApp {
                 if (!scanner.hasNextInt()) {
                     System.out.println("Enter only numbers from 0 to 7!: ");
                     scanner.next();
+                    pausePrint();
                     continue;
                 }
                 else {    
@@ -151,8 +152,10 @@ public class RecipeApp {
     
         if (removed) {
             saveRecipe();
+            pausePrint();
         } else {
-            System.out.println("Recipe not found.");
+            System.out.println("\n" + "Recipe not found." + "\n");
+            pausePrint();
         }
     }
 
@@ -165,7 +168,7 @@ public class RecipeApp {
                     recipe.getName() + ";" + recipe.getIngredients() + ";" + recipe.getDescription() + ";"
                     + recipe.getTime() + ";" + recipe.getType() + "\n");
             }
-            System.out.println("Recipes saved to file successfully.");
+            System.out.println("Recipes saved to file successfully." + "\n");
         } catch (IOException e) {
             System.out.println("Error saving recipes to file.");
         }
@@ -210,8 +213,7 @@ public class RecipeApp {
                 if (found) {
                 }
                 if (!found) {
-                    System.out
-                            .println("No recipes found with cooking time less than or equal to " + time + " minutes.");
+                    System.out.println("No recipes found with cooking time less than or equal to " + time + " minutes.");
                 }
             }
             break;
