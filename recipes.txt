@@ -1,5 +1,6 @@
-Caprese Salad;Serve cool salad; Fresh mozzarella cheese, tomatoes, fresh basil, salt, and olive oil;30; Vegetarian
-Spaghetti Aglio e Olio; Serve hot and eat; Spaghetti pasta, garlic, extra-virgin olive oil, red pepper flakes, and Parmesan cheese;15; Vegetarian
-Focaccia Bread; Eat warm; Flour, water, active dry yeast, salt, and olive oil;60; Vegan
-Pesto Pasta; Eat in summer; Linguine pasta, basil pesto, grated Parmesan cheese, cherry tomatoes, and pine nuts;20; Vegetarian
-Bruschetta; Good starter; Sliced bread, tomatoes, fresh basil, garlic, and extra-virgin olive oil;10; Vegan
+Caprese Salad; fresh mozzarella cheese, tomatoes, fresh basil, salt, and olive oil;Serve cool salad;30; vegetarian
+Spaghetti Aglio e Olio; spaghetti pasta, garlic, extra-virgin olive oil, red pepper flakes, and parmesan cheese; Serve hot and eat;15; vegetarian
+Focaccia Bread; flour, water, active dry yeast, salt, and olive oil; Eat warm;60; vegan
+Pesto Pasta; linguine pasta, basil pesto, grated Parmesan cheese, cherry tomatoes, and pine nuts; Eat in summer;20; vegetarian
+Bruschetta; sliced bread, tomatoes, fresh basil, garlic, and extra-virgin olive oil; Good starter;10; vegan
+Tiramisu;eggs, cream, coffee, sugar, ladyfingers;light coffee dessert;120;dessert

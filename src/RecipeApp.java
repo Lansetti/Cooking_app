@@ -5,7 +5,7 @@ public class RecipeApp {
 
     public static ArrayList<Recipe> recipes = new ArrayList<>();
     public static Scanner scanner = new Scanner(System.in);
-
+    
     public static void main(String[] args) {
         loadRecipesFromFile();
         int choice = 0;
@@ -23,10 +23,10 @@ public class RecipeApp {
             System.out.println("[7] Show recipes by type");
             System.out.println("[0] Exit");
             System.out.print("Number: ");
-
+    
             choice = scanner.nextInt();
             scanner.nextLine();
-
+    
             switch (choice) {
                 case 1:
                     addRecipe();
@@ -56,40 +56,40 @@ public class RecipeApp {
                     break;
             }
         } while (choice != 0);
-
+    
         System.out.println("Goodbye!");
     }
-
+    
     public static void addRecipe() {
         System.out.println("Add recipe name:");
-        String name = scanner.nextLine();
-
+        String name = scanner.nextLine().toLowerCase();
+    
         System.out.println("Please enter the recipe description:");
-        String ingredients = scanner.nextLine();
-
+        String ingredients = scanner.nextLine().toLowerCase();
+    
         System.out.println("Please enter the recipe ingredients:");
-        String description = scanner.nextLine();
-
+        String description = scanner.nextLine().toLowerCase();
+    
         System.out.println("Please enter the recipe cooking time:");
-        String time = scanner.nextLine();
-
+        String time = scanner.nextLine().toLowerCase();
+    
         System.out.println("Please enter the recipe type(Vegan, vegetarian...):");
-        String type = scanner.nextLine();
-
+        String type = scanner.nextLine().toLowerCase();
+    
         Recipe recipe = new Recipe(name, ingredients, description, time, type);
         recipes.add(recipe);
         saveRecipe();
     }
+    
     // Show a single recipe by name.
-
     public static void showOneRecipe() {
         System.out.println();
         System.out.println("Please enter the recipe name:");
         recipeNames();
         System.out.println();
-        String name = scanner.nextLine();
+        String name = scanner.nextLine().toLowerCase();
         System.out.println();
-
+    
         for (Recipe recipe : recipes) {
             if (recipe.getName().contains(name)) {
                 System.out.println(recipe);
@@ -98,12 +98,11 @@ public class RecipeApp {
                 return;
             }
         }
-
+    
         System.out.println("Recipe not found.");
     }
-
+    
     // Show all recipes from the list.
-
     public static void showAllRecipes() {
         for (Recipe recipe : recipes) {
             System.out.println(recipe);
@@ -111,15 +110,14 @@ public class RecipeApp {
         System.out.println();
         pausePrint();
     }
-
+    
     // Remove a recipe from the list. The name entered must be equal to the name on
-    // the list. Can we edit the code so it shows the repcipe to be deleted
+    // the list. Can we edit the code so it shows the recipe to be deleted
     // and asks the user to confirm.
-
     public static void removeRecipe() {
         System.out.println("Please enter the recipe name to be removed:");
         recipeNames();
-        String name = scanner.nextLine();
+        String name = scanner.nextLine().toLowerCase();
     
         Iterator<Recipe> iterator = recipes.iterator();
         boolean removed = false;
@@ -146,9 +144,9 @@ public class RecipeApp {
             System.out.println("Recipe not found.");
         }
     }
-
+    
     // Save a recipe to the file
-
+    
     public static void saveRecipe() {
         try (FileWriter writer = new FileWriter(new File("recipes.txt"))) {
             for (Recipe recipe : recipes) {
@@ -161,13 +159,13 @@ public class RecipeApp {
             System.out.println("Error saving recipes to file.");
         }
     }
-
-    // Load all recipies from a file to memory
-
+    
+    // Load all recipes from a file to memory
+    
     public static void loadRecipesFromFile() {
         try (Scanner fileScanner = new Scanner(new File("recipes.txt"))) {
             recipes.clear();
-
+    
             while (fileScanner.hasNextLine()) {
                 String[] split = fileScanner.nextLine().split(";");
                 Recipe recipe = new Recipe(split[0], split[1], split[2], split[3], split[4]);
@@ -177,10 +175,10 @@ public class RecipeApp {
             System.out.println("Recipes file not found.");
         }
     }
-
-    // Print a list of recipies that can be cooked in n minutes or less, where n is
+    
+    // Print a list of recipes that can be cooked in n minutes or less, where n is
     // chosen by the user.
-
+    
     public static void typeCookingTime() {
         System.out.println("Please enter the max cooking time in minutes:");
         while (true) {
@@ -188,8 +186,7 @@ public class RecipeApp {
                 System.out.println("Enter only integers!: ");
                 scanner.next(); // discard
                 continue;
-            }
-            else {
+            } else {
                 int time = scanner.nextInt();
                 boolean found = false;
                 for (Recipe recipe : recipes) {
@@ -198,46 +195,42 @@ public class RecipeApp {
                         found = true;
                     }
                 }
-                if (found) {
-                }
                 if (!found) {
-                    System.out
-                            .println("No recipes found with cooking time less than or equal to " + time + " minutes.");
+                    System.out.println("No recipes found with cooking time less than or equal to " + time + " minutes.");
                 }
             }
             break;
         }
+        pausePrint();
     }
-
-    // Print a list of recipies containing an Ingredient entered by the user.
-
+    
+    // Print a list of recipes containing an Ingredient entered by the user.
+    
     public static void typeIngredients() {
-       System.out.println("Please enter an ingredient:");
-        String ingredient = scanner.nextLine();
-        Boolean found = false;
-
-
+        System.out.println("Please enter an ingredient:");
+        String ingredient = scanner.nextLine().toLowerCase();
+        boolean found = false;
+    
         for (Recipe recipe : recipes) {
             if (recipe.getIngredients().contains(ingredient)) {
                 System.out.println(recipe);
                 found = true;
             }
         }
-
-        if(!found) {
-        System.out.println("No recipes found with " + ingredient + " ingredient.");
+    
+        if (!found) {
+            System.out.println("No recipes found with " + ingredient + " ingredient.");
         }
-
+    
         pausePrint();
-
     }
-
+    
     // Print a list of recipes that are of a type entered by the user.
-
+    
     public static void typeType() {
         System.out.println("Please enter a recipe type (eg. Vegan, Vegetarian...):");
-        String type = scanner.nextLine();
-
+        String type = scanner.nextLine().toLowerCase();
+    
         boolean found = false;
         for (Recipe recipe : recipes) {
             if (recipe.getType().contains(type)) {
@@ -245,26 +238,26 @@ public class RecipeApp {
                 found = true;
             }
         }
-
+    
         if (!found) {
             System.out.println("No recipes found for type: " + type);
         }
         pausePrint();
     }
-
-    // Show the names of all the recipes (I cant remember them otherwise)
-
+    
+    // Show the names of all the recipes (I can't remember them otherwise)
+    
     public static void recipeNames() {
         for (Recipe recipe : recipes) {
             System.out.print(recipe.getName() + ", ");
         }
         System.out.println();
     }
-
+    
     // Pause for readability
-
+    
     public static void pausePrint() {
-        System.out.print("--- Press enter to continue ---");
+        System.out.print("--- Press enter to continue or 0 to exit---");
         scanner.nextLine();
     }
 }
