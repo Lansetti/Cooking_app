@@ -87,8 +87,17 @@ public class RecipeApp {
         System.out.println("Please enter the recipe ingredients:");
         String description = scanner.nextLine();
 
-        System.out.println("Please enter the recipe cooking time:");
-        String time = scanner.nextLine();
+        System.out.println("Please enter the recipe cooking time in minutes:");
+        // If the user doesn't enter an integer give the message to enter only integers until he does. and then convert the int to string.
+        while (true) {    
+            if (!scanner.hasNextInt()) {
+                System.out.println("Enter only integers!: ");
+                scanner.next();
+                continue;
+            }
+            else {    
+                String time = Integer.toString(scanner.nextInt());
+                scanner.nextLine();
 
         System.out.println("Please enter the recipe type(Vegan, vegetarian...):");
         String type = scanner.nextLine();
@@ -96,6 +105,9 @@ public class RecipeApp {
         Recipe recipe = new Recipe(name, ingredients, description, time, type);
         recipes.add(recipe);
         saveRecipe();
+    }
+        break;
+        } 
     }
     // Show a single recipe by name.
 
@@ -159,7 +171,6 @@ public class RecipeApp {
     
         if (removed) {
             saveRecipe();
-            pausePrint();
         } else {
             System.out.println("Recipe not found." + "\n");
             pausePrint();
