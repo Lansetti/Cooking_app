@@ -32,7 +32,6 @@ public class RecipeApp {
                 if (!scanner.hasNextInt()) {
                     System.out.println("Enter only numbers from 0 to 7!: ");
                     scanner.next();
-                    pausePrint();
                     continue;
                 }
                 else {    
@@ -130,6 +129,7 @@ public class RecipeApp {
         }
 
         System.out.println("Recipe not found." + "\n");
+        pausePrint();
     }
 
     // Show all recipes from the list.
