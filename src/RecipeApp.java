@@ -284,7 +284,7 @@ public class RecipeApp {
         // Go through the list and check if there is a match with the type
         // If there is a match, shows the recipes.
         for (Recipe recipe : recipes) {
-            if (recipe.getType().contains(type)) {
+            if (recipe.getType().equals(type)) {        // uses 'equals' to not prnt everything with partial input f.ex veg
                 System.out.println(recipe);
                 found = true;
             }
