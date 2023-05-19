@@ -26,15 +26,15 @@ public class RecipeApp {
             System.out.println("[7] Show recipes by type");
             System.out.println("[0] Exit");
             System.out.print("Number: ");
-            // Check if the user doesn't enter a number from 0 to 7, if he doesn't repeat the message.
+            // Check if the user doesn't enter a number from 0 to 7, if he doesn't repeat
+            // the message.
             // If he does, continue to the option choosen.
-            while (true) {    
+            while (true) {
                 if (!scanner.hasNextInt()) {
                     System.out.println("Enter only numbers from 0 to 7!: ");
                     scanner.next();
                     continue;
-                }
-                else {    
+                } else {
                     choice = scanner.nextInt();
                     scanner.nextLine();
 
@@ -70,12 +70,13 @@ public class RecipeApp {
                 break;
             }
         } while (choice != 0);
-// Message to the user leaving the App
+        // Message to the user leaving the App
         System.out.println("Goodbye!");
     }
-    
-// Add a recipe asking to the user name, ingredients, description, time and type.
-    
+
+    // Add a recipe by asking the user for recipe name, ingredients, description,
+    // cooking time and type.
+
     public static void addRecipe() {
         System.out.println("Add recipe name:");
         String name = scanner.nextLine().toLowerCase();
@@ -87,28 +88,28 @@ public class RecipeApp {
         String description = scanner.nextLine().toLowerCase();
 
         System.out.println("Please enter the recipe cooking time in minutes:");
-        // If the user doesn't enter an integer give the message to enter only integers until he does. and then convert the int to string.
-        while (true) {    
+        // If the user doesn't enter an integer give the message to enter only integers
+        // until he does. and then convert the int to string.
+        while (true) {
             if (!scanner.hasNextInt()) {
                 System.out.println("Enter only integers!: ");
                 scanner.next();
                 continue;
-            }
-            else {    
+            } else {
                 String time = Integer.toString(scanner.nextInt());
                 scanner.nextLine();
 
-        System.out.println("Please enter the recipe type(Vegan, vegetarian...):");
-        String type = scanner.nextLine().toLowerCase();
+                System.out.println("Please enter the recipe type(Vegan, vegetarian...):");
+                String type = scanner.nextLine().toLowerCase();
 
-        Recipe recipe = new Recipe(name, ingredients, description, time, type);
-        recipes.add(recipe);
-        saveRecipe();
+                Recipe recipe = new Recipe(name, ingredients, description, time, type);
+                recipes.add(recipe);
+                saveRecipe();
+            }
+            break;
+        }
     }
-        break;
-        } 
-    }
-    // Show a single recipe by name.
+    // Search a single recipe by name.
 
     public static void showOneRecipe() {
         System.out.println();
@@ -117,7 +118,7 @@ public class RecipeApp {
         System.out.println();
         String name = scanner.nextLine().toLowerCase();
         System.out.println();
-// Go through the list and check if there is a match with the name
+        // Go through the list and check if there is a match with the name
         // If there is, show the recipe, otherwise give message ".. not found"
         for (Recipe recipe : recipes) {
             if (recipe.getName().contains(name)) {
@@ -149,16 +150,17 @@ public class RecipeApp {
         System.out.println("Please enter the recipe name to be removed:");
         recipeNames();
         String name = scanner.nextLine().toLowerCase();
-    
+
         Iterator<Recipe> iterator = recipes.iterator();
         boolean removed = false;
-    // Check in the list all the recipe with the name input from the user.
+        // Check in the list all the recipe with the name input from the user.
         while (iterator.hasNext()) {
             Recipe recipe = iterator.next();
             if (recipe.getName().equals(name)) {
                 System.out.println("Found recipe: ");
                 System.out.println(recipe);
-        // If there is a match, ask confirmation to the user, and if user input "yes", delete the recipe.
+                // If there is a match, ask confirmation to the user, and if user input "yes",
+                // delete the recipe.
                 System.out.println("Are you sure you want to delete this recipe? (yes/no)");
                 String confirmation = scanner.nextLine().toLowerCase();
                 if (confirmation.equals("yes")) {
@@ -168,7 +170,7 @@ public class RecipeApp {
                 }
             }
         }
-    
+
         if (removed) {
             saveRecipe();
         } else {
@@ -183,8 +185,8 @@ public class RecipeApp {
         try (FileWriter writer = new FileWriter(new File("recipes.txt"))) {
             for (Recipe recipe : recipes) {
                 writer.write(
-                    recipe.getName() + ";" + recipe.getIngredients() + ";" + recipe.getDescription() + ";"
-                    + recipe.getTime() + ";" + recipe.getType() + "\n");
+                        recipe.getName() + ";" + recipe.getIngredients() + ";" + recipe.getDescription() + ";"
+                                + recipe.getTime() + ";" + recipe.getType() + "\n");
             }
             System.out.println("Recipes saved to file successfully." + "\n");
             pausePrint();
@@ -199,8 +201,9 @@ public class RecipeApp {
     public static void loadRecipesFromFile() {
         try (Scanner fileScanner = new Scanner(new File("recipes.txt"))) {
             recipes.clear();
-// It check each line of the file and split the line in 5 (name, ingredients, description, time, type)
-//  that are separeted by ;
+            // It check each line of the file and split the line in 5 (name, ingredients,
+            // description, time, type)
+            // that are separeted by ;
             while (fileScanner.hasNextLine()) {
                 String[] split = fileScanner.nextLine().split(";");
                 Recipe recipe = new Recipe(split[0], split[1], split[2], split[3], split[4]);
@@ -211,8 +214,8 @@ public class RecipeApp {
         }
     }
 
-    // Print a list of recipes that can be cooked in n minutes or less, where n is
-    // chosen by the user.
+    // Print a list of recipes that can be cooked in [n] minutes or less, where [n]
+    // is chosen by the user.
 
     public static void typeCookingTime() {
         System.out.println("Please enter the max cooking time in minutes:");
@@ -224,7 +227,8 @@ public class RecipeApp {
                 scanner.next(); // discard
                 continue;
             }
-            // If user enter an integer, the program go through the list and show the recipes with that time or less
+            // If user enter an integer, the program go through the list and show the
+            // recipes with that time or less
             // If there aren't recipes with that time, show message "No recipes found..."
             else {
                 int time = scanner.nextInt();
@@ -238,60 +242,61 @@ public class RecipeApp {
                 if (found) {
                 }
                 if (!found) {
-                    System.out.println("No recipes found with cooking time less than or equal to " + time + " minutes.");
+                    System.out
+                            .println("No recipes found with cooking time less than or equal to " + time + " minutes.");
                 }
             }
             break;
         }
     }
 
-    // Print a list of recipes containing an Ingredient entered by the user.
+    // Print a list of recipes containing an ingredient entered by the user.
 
     public static void typeIngredients() {
-       System.out.println("Please enter an ingredient:");
+        System.out.println("Please enter an ingredient:");
         String ingredient = scanner.nextLine().toLowerCase();
         Boolean found = false;
 
-    // Go through the list and check if there is a match with the ingredients (Case sensitive)
-    // If there is a match, shows the recipes.
+        // Go through the list and check if there is a match with the ingredients
+        // If there is a match, shows the recipes.
         for (Recipe recipe : recipes) {
             if (recipe.getIngredients().contains(ingredient)) {
                 System.out.println(recipe);
                 found = true;
             }
         }
-    // If there are no matches it prints the message "No recipes found..."
-        if(!found) {
-        System.out.println("No recipes found with " + ingredient + " ingredient.");
+        // If there are no matches it prints the message "No recipes found..."
+        if (!found) {
+            System.out.println("No recipes found with " + ingredient + " ingredient.");
         }
-        
+
         pausePrint();
-        
+
     }
 
     // Print a list of recipes that are of a type entered by the user.
 
     public static void typeType() {
-        System.out.println("Please enter a recipe type (eg. Vegan, Vegetarian...):");
+        System.out.println("Please enter a recipe type (eg. vegan, vegetarian...):");
         String type = scanner.nextLine().toLowerCase();
 
         boolean found = false;
         // Go through the list and check if there is a match with the type
         // If there is a match, shows the recipes.
         for (Recipe recipe : recipes) {
-            if (recipe.getType().contains(type)) {
+            if (recipe.getType().equals(type)) {        // uses 'equals' to not prnt everything with partial input f.ex veg
                 System.out.println(recipe);
                 found = true;
             }
         }
-// If there are no matches it prints the message "No recipes found..."
+        // If there are no matches it prints the message "No recipes found..."
         if (!found) {
             System.out.println("No recipes found for type: " + type);
         }
         pausePrint();
     }
 
-    // Show the names of all the recipes (I cant remember them otherwise)
+    // Show the names of all the recipes (I can't remember them otherwise)
 
     public static void recipeNames() {
         for (Recipe recipe : recipes) {
