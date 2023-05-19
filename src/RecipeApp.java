@@ -121,7 +121,7 @@ public class RecipeApp {
         // Go through the list and check if there is a match with the name
         // If there is, show the recipe, otherwise give message ".. not found"
         for (Recipe recipe : recipes) {
-            if (recipe.getName().contains(name)) {
+            if (recipe.getName().equals(name)) {
                 System.out.println(recipe);
                 System.out.println();
                 pausePrint();
@@ -284,7 +284,7 @@ public class RecipeApp {
         // Go through the list and check if there is a match with the type
         // If there is a match, shows the recipes.
         for (Recipe recipe : recipes) {
-            if (recipe.getType().contains(type)) {
+            if (recipe.getType().equals(type)) {
                 System.out.println(recipe);
                 found = true;
             }
